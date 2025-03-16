@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import style from './styles.module.scss';
 import { TIconProps } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/utils';
-import { useToggleState } from '../../../hooks/useToggle';
+import { useToggleState } from '../../../../hooks/useToggle';
 
 interface IHeaderItemProps {
 	id: number;

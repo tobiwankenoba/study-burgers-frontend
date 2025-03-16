@@ -1,12 +1,13 @@
 import { clsx } from 'clsx';
 import { HEADER_LINKS } from '../../constants/headerLinks';
 import style from './styles.module.scss';
-import { HeaderItem } from './components';
+
 import { useState } from 'react';
 import {
 	Logo,
 	ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { HeaderItem } from './components/header-item';
 
 export const AppHeader: React.FC = () => {
 	const [activeLinkId, setActiveLinkId] = useState(HEADER_LINKS[0].id);
