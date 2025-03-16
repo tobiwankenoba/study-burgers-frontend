@@ -1,12 +1,19 @@
 import { IngredientsTabs } from './components/ingredients-tabs';
 import style from './styles.module.scss';
 import { Ingredient } from './components/ingredient';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { fetchIngredients } from '@services/fetchIngredients';
-import { TPreparedIngredients } from '../../types/ingredients';
+import { TIngredient, TPreparedIngredients } from '../../types/ingredients';
 import { clsx } from 'clsx';
+import { ModalInfo } from './components/modal-info';
 
-export const BurgerIngredients: React.FC = () => {
+interface IBurgerIngredientsProps {
+	onModalContent: (content: JSX.Element) => void;
+}
+
+export const BurgerIngredients: React.FC<IBurgerIngredientsProps> = ({
+	onModalContent,
+}) => {
 	const [ingredients, setIngredients] = useState<TPreparedIngredients[]>();
 
 	useEffect(() => {
@@ -16,6 +23,13 @@ export const BurgerIngredients: React.FC = () => {
 			setIngredients(result);
 		})();
 	}, []);
+
+	const handleClickIngredient = useCallback(
+		(ingredient: TIngredient) => {
+			onModalContent(<ModalInfo ingredient={ingredient} />);
+		},
+		[onModalContent]
+	);
 
 	if (!ingredients) {
 		return null;
@@ -31,7 +45,11 @@ export const BurgerIngredients: React.FC = () => {
 						<div className='text text_type_main-medium mb-6'>{title}</div>
 						<div className={style.itemsList}>
 							{items.map((item, index) => (
-								<Ingredient key={index} {...item} />
+								<Ingredient
+									onClick={() => handleClickIngredient(item)}
+									key={index}
+									{...item}
+								/>
 							))}
 						</div>
 					</div>

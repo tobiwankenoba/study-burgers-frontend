@@ -3,8 +3,20 @@ import style from './styles.module.scss';
 import { clsx } from 'clsx';
 import { BurgerScrollItem } from './components/burger-scroll-item';
 import { BurgerFixedItem } from './components/burger-fixed-item/burger-fixed-item';
+import { useCallback } from 'react';
+import { OrderDetails } from './components/order-details';
 
-export const BurgerConstructor: React.FC = () => {
+interface IBurgerConstructorProps {
+	onModalContent: (content: JSX.Element) => void;
+}
+
+export const BurgerConstructor: React.FC<IBurgerConstructorProps> = ({
+	onModalContent,
+}) => {
+	const handleClickButton = useCallback(() => {
+		onModalContent(<OrderDetails />);
+	}, [onModalContent]);
+
 	return (
 		<article className={style.container}>
 			<div className={clsx(style.constructorElements, 'mb-10')}>
@@ -38,7 +50,11 @@ export const BurgerConstructor: React.FC = () => {
 					610
 				</div>
 				<div className={style.btn}>
-					<Button htmlType='button' type='primary' size='medium'>
+					<Button
+						htmlType='button'
+						onClick={handleClickButton}
+						type='primary'
+						size='medium'>
 						Нажми на меня
 					</Button>
 				</div>

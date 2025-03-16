@@ -31,6 +31,7 @@ export const prepareIngredients = (
 			carbohydrates,
 			price,
 			proteins,
+			fat,
 			type,
 		}) => {
 			const formatedElement = {
@@ -41,6 +42,7 @@ export const prepareIngredients = (
 				calories,
 				carbohydrates,
 				price,
+				fat,
 				proteins,
 			} as TIngredient;
 
