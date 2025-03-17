@@ -20,12 +20,12 @@ export const AppHeader: React.FC = () => {
 		<header className={style.container}>
 			<div className={clsx(style.wrapper, 'p-4')}>
 				<ul className={style.links} role='menu'>
-					{HEADER_LINKS.map((item, index) => (
+					{HEADER_LINKS.map((item) => (
 						<HeaderItem
 							onClick={handleActiveLinkId}
 							activeItemId={activeLinkId}
 							{...item}
-							key={index}
+							key={item.id}
 						/>
 					))}
 				</ul>

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ModalOverlay } from './components/modal-overlay';
 import style from './styles.module.scss';
 import { createPortal } from 'react-dom';
@@ -17,6 +18,16 @@ export const Modal: React.FC<IModalProps> = ({
 	header,
 	onClose,
 }) => {
+	useEffect(() => {
+		const close = (e: KeyboardEvent) => {
+			if (e.key === 'Escape' && open) {
+				onClose();
+			}
+		};
+		window.addEventListener('keydown', close);
+		return () => window.removeEventListener('keydown', close);
+	}, [onClose, open]);
+
 	if (!open) {
 		return null;
 	}

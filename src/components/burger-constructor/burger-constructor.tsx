@@ -29,13 +29,6 @@ export const BurgerConstructor: React.FC<IBurgerConstructorProps> = ({
 				/>
 				<div className={style.dynamicElements}>
 					<BurgerScrollItem />
-					<BurgerScrollItem />
-					<BurgerScrollItem />
-					<BurgerScrollItem />
-					<BurgerScrollItem />
-					<BurgerScrollItem />
-					<BurgerScrollItem />
-					<BurgerScrollItem />
 				</div>
 				<BurgerFixedItem
 					type='bottom'
