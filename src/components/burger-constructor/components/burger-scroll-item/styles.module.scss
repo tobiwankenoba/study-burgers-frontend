@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	justify-content: flex-end;
+	position: relative;
+	width: 100%;
+	min-width: 536px;
+}
+
+.dragNDrop {
+	background: no-repeat center center / contain url('./assets/dragndrop.svg');
+	width: 24px;
+	height: 24px;
+}

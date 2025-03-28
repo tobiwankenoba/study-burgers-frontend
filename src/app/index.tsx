@@ -1,36 +1,40 @@
-import { clsx } from 'clsx';
-import { useState } from 'react';
-import s from './app.module.scss';
-import reactLogo from './assets/react.svg';
-import { ReactComponent as TypescriptLogo } from './assets/typescript.svg';
-import { add } from '@utils/one';
-import { AppHeader } from '@components/app-header/app-header';
+import { Content } from '@components/content';
+import style from './app.module.scss';
+import { AppHeader } from '@components/app-header';
+import { createReduxStore } from '@utils/redux';
+import { TApplicationState } from '../types/redux';
+import { Provider } from 'react-redux';
+import { EIngridientStatus } from '../types/ingredients';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { EOrderStatus } from '../types/order';
 
 export const App = () => {
-	// const num = 0
-	const [count, setCount] = useState(0);
+	const preloadedState: TApplicationState = {
+		orderStatus: { status: EOrderStatus.Init },
+		ingridientsState: { ingridients: [], status: EIngridientStatus.Loading },
+		constructorState: {
+			bun: {
+				id: 0,
+				title: '',
+				price: 0,
+				image: '',
+				privateId: '',
+			},
+			ingridients: [],
+		},
+	};
+
+	const store = createReduxStore(preloadedState, true);
 
 	return (
-		<div className='page'>
-			<AppHeader />
-			<div className='logo-wrapper'>
-				<a href='https://reactjs.org' target='_blank' rel='noreferrer'>
-					<img
-						src={reactLogo}
-						className={clsx(s.logo, s.react)}
-						alt={`React logo ${add(2, 5)}`}
-					/>
-				</a>
-				<a href='https://vitejs.dev' target='_blank' rel='noreferrer'>
-					<TypescriptLogo className={s.logo} />
-				</a>
-			</div>
-			<h1>React + TS</h1>
-			<div className={s.card}>
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-			</div>
-		</div>
+		<Provider store={store}>
+			<DndProvider backend={HTML5Backend}>
+				<div className={style.container}>
+					<AppHeader />
+					<Content />
+				</div>
+			</DndProvider>
+		</Provider>
 	);
 };
