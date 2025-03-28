@@ -8,7 +8,7 @@ export const OrderDetails: React.FC = () => {
 
 	return (
 		<div className={clsx(style.container, 'p-10')}>
-			<div className='text text_type_digits-large mb-8 '>{orderNumber}</div>
+			<div className='text text_type_digits-large mb-8'>{orderNumber}</div>
 			<div className={style.wrapper}>
 				<div className={'text text_type_main-medium pb-10'}>
 					идентификатор заказа
