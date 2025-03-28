@@ -23,6 +23,7 @@ export const prepareIngredients = (
 	];
 	response.data.map(
 		({
+			_id,
 			name,
 			image,
 			image_large,
@@ -35,6 +36,9 @@ export const prepareIngredients = (
 			type,
 		}) => {
 			const formatedElement = {
+				id: Math.random(),
+				privateId: _id,
+				type,
 				title: name,
 				image,
 				bigImage: image_large,

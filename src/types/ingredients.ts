@@ -1,4 +1,7 @@
 export type TIngredient = {
+	id: number;
+	privateId: string;
+	type: string;
 	title: string;
 	image: string;
 	bigImage: string;
@@ -15,8 +18,20 @@ export type TPreparedIngredients = {
 	items: TIngredient[];
 };
 
+export enum EIngridientStatus {
+	Loading = 'loading',
+	Success = 'success',
+	Failed = 'failed',
+}
+
+export type TIngridientsState = {
+	ingridients: TPreparedIngredients[];
+	status: EIngridientStatus;
+};
+
 export type TIngredientsResponse = {
 	data: {
+		_id: string;
 		name: string;
 		type: string;
 		proteins: number;
@@ -29,3 +44,18 @@ export type TIngredientsResponse = {
 		image_large: string;
 	}[];
 };
+
+export enum ETabs {
+	Buns = 'Булки',
+	Sausages = 'Соусы',
+	Ingredients = 'Начинки',
+}
+
+export enum EDrugTypeIngridients {
+	Ingridient = 'ingridient',
+	LocalIngridient = 'localIngridient',
+}
+
+export enum EDrugTypeBuns {
+	Bun = 'bun',
+}
