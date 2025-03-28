@@ -10,12 +10,12 @@ module.exports = {
 			version: 'detect',
 		},
 		'import/parsers': {
-			'@typescript-eslint/parser': ['.ts', '.tsx',],
+			'@typescript-eslint/parser': ['.ts', '.tsx'],
 		},
 		'import/resolver': {
 			typescript: {
 				alwaysTryTypes: true,
-				project: "./tsconfig.json",
+				project: './tsconfig.json',
 			},
 		},
 	},
@@ -40,6 +40,8 @@ module.exports = {
 		'react/prop-types': 'off',
 		'react/jsx-uses-react': 'off',
 		'react/react-in-jsx-scope': 'off',
+		'jsx-a11y/click-events-have-key-events': 'off',
+		'jsx-a11y/no-noninteractive-element-to-interactive-role': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
 	},
 };

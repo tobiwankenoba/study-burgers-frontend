@@ -1,0 +1,19 @@
+.item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex: 0 0 272px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.price {
+	display: flex;
+	gap: 8px;
+}
+
+.icon {
+	background: no-repeat center center / contain url('./assets/priceIcon.svg');
+	width: 24px;
+	height: 24px;
+}
