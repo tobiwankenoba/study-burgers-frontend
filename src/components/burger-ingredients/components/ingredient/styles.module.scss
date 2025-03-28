@@ -5,6 +5,7 @@
 	flex: 0 0 272px;
 	text-align: center;
 	cursor: pointer;
+	position: relative;
 }
 
 .price {
@@ -16,4 +17,19 @@
 	background: no-repeat center center / contain url('./assets/priceIcon.svg');
 	width: 24px;
 	height: 24px;
+}
+
+.counter {
+	position: absolute;
+	right: 0;
+	top: 0;
+	border: 1px solid #4c4cff;
+	background-color: #4c4cff;
+	border-radius: 200px;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
 }
