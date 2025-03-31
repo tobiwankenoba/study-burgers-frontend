@@ -1,11 +1,4 @@
 .container {
-	padding-right: 20px;
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-}
-
-.empty {
 	background: var(--background-element);
 	border-radius: var(--common-border-radius-s);
 	box-sizing: border-box;
@@ -18,14 +11,8 @@
 	max-width: 536px;
 	min-height: 80px;
 	padding: 16px 24px;
+	width: 536px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 100%;
-	&.top {
-		border-radius: 88px 88px 40px 40px;
-	}
-	&.bottom {
-		border-radius: 40px 40px 88px 88px;
-	}
 }
