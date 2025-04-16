@@ -3,7 +3,7 @@ import type { Identifier, XYCoord } from 'dnd-core';
 import style from './styles.module.scss';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
-import { EDrugTypeIngridients } from '../../../../types/ingredients';
+import { EDrugTypeIngredients } from '../../../../types/ingredients';
 
 type TBurgerScrollItemProps = {
 	index: number;
@@ -32,7 +32,7 @@ export const BurgerScrollItem: React.FC<TBurgerScrollItemProps> = ({
 }) => {
 	const itemRef = useRef<HTMLDivElement>(null);
 	const [{}, drop] = useDrop<DragItem, void, { handlerId: Identifier | null }>({
-		accept: EDrugTypeIngridients.LocalIngridient,
+		accept: EDrugTypeIngredients.LocalIngredient,
 		collect(monitor) {
 			return {
 				handlerId: monitor.getHandlerId(),
@@ -89,7 +89,7 @@ export const BurgerScrollItem: React.FC<TBurgerScrollItemProps> = ({
 	});
 
 	const [{ isDragging }, drag] = useDrag({
-		type: EDrugTypeIngridients.LocalIngridient,
+		type: EDrugTypeIngredients.LocalIngredient,
 		item: () => {
 			return { id, index };
 		},

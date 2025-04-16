@@ -2,8 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import { IPreloadedState } from '../../types/redux';
 import {
 	constructorBurgerReducer,
-	ingridientsReducer,
+	ingredientsReducer,
 	orderReducer,
+	userReducer,
 } from '../../slices';
 
 export function createReduxStore(
@@ -15,7 +16,8 @@ export function createReduxStore(
 		middleware: (getDefaultMiddleware) => getDefaultMiddleware({}),
 		preloadedState,
 		reducer: {
-			ingridientsState: ingridientsReducer,
+			ingredientsState: ingredientsReducer,
+			user: userReducer,
 			constructorState: constructorBurgerReducer,
 			orderStatus: orderReducer,
 		},

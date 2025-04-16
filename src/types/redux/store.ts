@@ -1,12 +1,14 @@
 import { createReduxStore } from '@utils/redux';
-import { TIngridientsState } from '../ingredients';
+import { TIngredientsState } from '../ingredients';
 import { TConstructorState } from '../constructor';
 import { TOrderStatus } from '../order';
+import { TUserState } from '../user';
 
 export interface IPreloadedState {
-	ingridientsState: TIngridientsState;
+	ingredientsState: TIngredientsState;
 	constructorState: TConstructorState;
 	orderStatus: TOrderStatus;
+	user: TUserState;
 }
 
 export type TReduxStore = ReturnType<typeof createReduxStore>;

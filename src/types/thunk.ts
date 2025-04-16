@@ -1,3 +1,6 @@
 import { TApplicationState, TDispatch } from './redux';
 
-export type TThunk = (dispatch: TDispatch, getState: () => TApplicationState) => void;
+export type TThunk = (
+	dispatch: TDispatch,
+	getState: () => TApplicationState
+) => void;

@@ -2,7 +2,7 @@ import { TIngredient } from './ingredients';
 
 export type TConstructorState = {
 	bun: TConstructorIngredient;
-	ingridients: TConstructorIngredient[];
+	ingredients: TConstructorIngredient[];
 };
 
 export type TConstructorIngredient = Pick<

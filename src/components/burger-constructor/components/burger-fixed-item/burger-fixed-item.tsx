@@ -4,8 +4,8 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { useDrop } from 'react-dnd';
 import { EDrugTypeBuns } from '../../../../types/ingredients';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
-import { setBunThunk } from '../../../../thunks/constructorBurger';
 import { TConstructorIngredient } from '../../../../types/constructor';
+import { setBun } from '../../../../slices';
 
 interface IBurgerFixedItemProps {
 	type: 'top' | 'bottom' | undefined;
@@ -27,8 +27,7 @@ export const BurgerFixedItem: React.FC<IBurgerFixedItemProps> = ({
 	const [, dropTarget] = useDrop({
 		accept: EDrugTypeBuns.Bun,
 		drop(item) {
-			console.log(item);
-			dispatch(setBunThunk(item as TConstructorIngredient));
+			dispatch(setBun(item as TConstructorIngredient));
 		},
 	});
 

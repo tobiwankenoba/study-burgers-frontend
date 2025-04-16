@@ -1,16 +1,15 @@
 import { IngredientsTabs } from './components/ingredients-tabs';
 import style from './styles.module.scss';
 import { Ingredient } from './components/ingredient';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { ETabs, TIngredient } from '../../types/ingredients';
+import { useCallback, useRef, useState } from 'react';
+import { ETabs } from '../../types/ingredients';
 import { clsx } from 'clsx';
-import { ModalInfo } from './components/modal-info';
+import { ModalInfo } from '../modal-info';
 import { useSelector } from 'react-redux';
-import { selectIngridients } from '../../selectors';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { ingridientsThunk } from '../../thunks';
+import { selectIngredients } from '../../selectors';
 import { TABS } from '../../constants/tabs';
 import { computeBounding } from '@utils/computeBounding';
+import { formatIngredients } from '../../types/formatIngredients';
 
 interface IBurgerIngredientsProps {
 	onModalContent: (content: JSX.Element) => void;
@@ -29,13 +28,9 @@ export const BurgerIngredients: React.FC<IBurgerIngredientsProps> = ({
 
 	const [activeTab, setActiveTab] = useState(TABS[0].title);
 
-	const { ingridients } = useSelector(selectIngridients);
+	const { ingredients } = useSelector(selectIngredients);
 
-	const dispatch = useAppDispatch();
-
-	useEffect(() => {
-		dispatch(ingridientsThunk());
-	}, [dispatch]);
+	const formatedIngredients = formatIngredients(ingredients);
 
 	const refsArray = [
 		{
@@ -95,14 +90,11 @@ export const BurgerIngredients: React.FC<IBurgerIngredientsProps> = ({
 		setActiveTab(tab);
 	}, []);
 
-	const handleClickIngredient = useCallback(
-		(ingredient: TIngredient) => {
-			onModalContent(<ModalInfo ingredient={ingredient} />);
-		},
-		[onModalContent]
-	);
+	const handleClickIngredient = useCallback(() => {
+		onModalContent(<ModalInfo />);
+	}, [onModalContent]);
 
-	if (!ingridients) {
+	if (!ingredients) {
 		return null;
 	}
 
@@ -115,7 +107,7 @@ export const BurgerIngredients: React.FC<IBurgerIngredientsProps> = ({
 				onClick={handleClickTab}
 			/>
 			<article onScroll={handleScroll} className={clsx(style.list, 'pt-10')}>
-				{ingridients.map(({ title, items }, index) => (
+				{formatedIngredients.map(({ title, items }, index) => (
 					<div key={index} className={style.item}>
 						<div
 							ref={refsArray.find((item) => item.title === title)?.ref}
@@ -125,7 +117,7 @@ export const BurgerIngredients: React.FC<IBurgerIngredientsProps> = ({
 						<div className={style.itemsList}>
 							{items.map((item, index) => (
 								<Ingredient
-									onClick={() => handleClickIngredient(item)}
+									onClick={() => handleClickIngredient()}
 									key={index}
 									{...item}
 								/>

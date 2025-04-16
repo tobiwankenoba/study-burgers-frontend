@@ -3,12 +3,13 @@ import style from './styles.module.scss';
 import { useDrag } from 'react-dnd';
 import {
 	EDrugTypeBuns,
-	EDrugTypeIngridients,
+	EDrugTypeIngredients,
 	TIngredient,
 } from '../../../../types/ingredients';
 import { useSelector } from 'react-redux';
 import { selectConstructorBurger } from '../../../../selectors';
 import { useMemo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 interface IIngredientProps {
 	image: string;
@@ -30,24 +31,27 @@ export const Ingredient: React.FC<IIngredientProps> = ({
 	onClick,
 }) => {
 	const [, dragRef] = useDrag({
-		type: type === 'bun' ? EDrugTypeBuns.Bun : EDrugTypeIngridients.Ingridient,
+		type: type === 'bun' ? EDrugTypeBuns.Bun : EDrugTypeIngredients.Ingredient,
 		item: { id, title, price, image, privateId } as TIngredient,
 	});
 
-	const { bun, ingridients } = useSelector(selectConstructorBurger);
+	const location = useLocation();
+
+	const { bun, ingredients } = useSelector(selectConstructorBurger);
 
 	const counter = useMemo(
 		() =>
 			type === 'bun'
 				? bun.privateId === privateId && 2
-				: ingridients.filter((item) => item.privateId === privateId).length,
-		[bun.privateId, ingridients, privateId, type]
+				: ingredients.filter((item) => item.privateId === privateId).length,
+		[bun.privateId, ingredients, privateId, type]
 	);
 
 	return (
-		<article
+		<Link
+			to={`/ingredients/${privateId}`}
+			state={{ backgroundLocation: location }}
 			ref={dragRef}
-			role='menuitem'
 			className={clsx(style.item, 'p-4')}
 			onClick={onClick}>
 			{Number(counter) > 0 && <div className={style.counter}>{counter}</div>}
@@ -56,6 +60,6 @@ export const Ingredient: React.FC<IIngredientProps> = ({
 				{price} <div className={style.icon} />
 			</div>
 			<div className='text text_type_main-default'>{title}</div>
-		</article>
+		</Link>
 	);
 };
