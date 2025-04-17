@@ -4,17 +4,9 @@ import { fetchLogout } from '@services/logout';
 
 export const logoutUserThunk = createAsyncThunk<boolean, void, IThunkApi>(
 	'user/logout',
-	async (_, thunkApi) => {
-		const { rejectWithValue } = thunkApi;
+	async () => {
+		const response = await fetchLogout();
 
-		try {
-			const response = await fetchLogout();
-
-			return response;
-		} catch (e) {
-			console.warn('error');
-
-			return rejectWithValue(e);
-		}
+		return response;
 	}
 );

@@ -6,16 +6,8 @@ export const resetPasswordThunk = createAsyncThunk<
 	boolean,
 	{ password: string; token: string },
 	IThunkApi
->('user/forgot', async ({ password, token }, thunkApi) => {
-	const { rejectWithValue } = thunkApi;
+>('user/forgot', async ({ password, token }) => {
+	const response = await fetchResetPasswordWithPin({ password, token });
 
-	try {
-		const response = await fetchResetPasswordWithPin({ password, token });
-
-		return response;
-	} catch (e) {
-		console.warn('error');
-
-		return rejectWithValue(e);
-	}
+	return response;
 });

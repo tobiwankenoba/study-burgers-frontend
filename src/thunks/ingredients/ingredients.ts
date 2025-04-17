@@ -7,16 +7,8 @@ export const ingredientsThunk = createAsyncThunk<
 	TIngredient[],
 	void,
 	IThunkApi
->('ingredients/getInfo', async (_, thunkApi) => {
-	const { rejectWithValue } = thunkApi;
+>('ingredients/getInfo', async () => {
+	const response = await fetchIngredients();
 
-	try {
-		const response = await fetchIngredients();
-
-		return response as TIngredient[];
-	} catch (e) {
-		console.warn('error');
-
-		return rejectWithValue(e);
-	}
+	return response as TIngredient[];
 });

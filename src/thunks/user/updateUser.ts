@@ -7,16 +7,8 @@ export const updateUserThunk = createAsyncThunk<
 	TUser | null,
 	{ email: string; password: string; name: string },
 	IThunkApi
->('user/update', async ({ email, password, name }, thunkApi) => {
-	const { rejectWithValue } = thunkApi;
+>('user/update', async ({ email, password, name }) => {
+	const response = await updateUserInfo({ email, password, name });
 
-	try {
-		const response = await updateUserInfo({ email, password, name });
-
-		return response;
-	} catch (e) {
-		console.warn('error');
-
-		return rejectWithValue(e);
-	}
+	return response;
 });

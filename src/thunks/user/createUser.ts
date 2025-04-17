@@ -7,16 +7,8 @@ export const createUserThunk = createAsyncThunk<
 	TUserState,
 	{ email: string; password: string; name: string },
 	IThunkApi
->('user/create', async ({ email, password, name }, thunkApi) => {
-	const { rejectWithValue } = thunkApi;
+>('user/create', async ({ email, password, name }) => {
+	const response = await fetchCreateUser({ email, password, name });
 
-	try {
-		const response = await fetchCreateUser({ email, password, name });
-
-		return response;
-	} catch (e) {
-		console.warn('error');
-
-		return rejectWithValue(e);
-	}
+	return response;
 });

@@ -7,16 +7,8 @@ export const loginUserThunk = createAsyncThunk<
 	TUserState,
 	{ email: string; password: string },
 	IThunkApi
->('user/login', async ({ email, password }, thunkApi) => {
-	const { rejectWithValue } = thunkApi;
+>('user/login', async ({ email, password }) => {
+	const response = await fetchLoginUser({ email, password });
 
-	try {
-		const response = await fetchLoginUser({ email, password });
-
-		return response;
-	} catch (e) {
-		console.warn('error');
-
-		return rejectWithValue(e);
-	}
+	return response;
 });

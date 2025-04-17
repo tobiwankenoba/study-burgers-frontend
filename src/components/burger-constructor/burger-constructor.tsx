@@ -90,7 +90,7 @@ export const BurgerConstructor: React.FC<IBurgerConstructorProps> = ({
 					{ingredients.length > 0 &&
 						ingredients.map((item, i) => (
 							<BurgerScrollItem
-								key={item.id}
+								key={i}
 								moveCard={moveCard}
 								index={i}
 								{...item}
