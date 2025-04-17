@@ -10,24 +10,16 @@ import { createReduxStore } from '@utils/redux';
 import { DndProvider } from 'react-dnd';
 import { Provider } from 'react-redux';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { fetchIngredients } from '@services/fetch-ingredients';
-import { getUserInfo } from '@services/get-user/service';
 
 (async () => {
 	const domNode = document.getElementById('root') as HTMLDivElement;
 	const root = createRoot(domNode);
 
-	const ingredients = await fetchIngredients();
-
-	const user = await getUserInfo();
-
-	console.log(user);
-
 	const preloadedState: TApplicationState = {
 		orderStatus: { status: EOrderStatus.Init },
-		user,
+		user: { user: null, isAuthChecked: false },
 		ingredientsState: {
-			ingredients: ingredients,
+			ingredients: [],
 			status: EIngredientStatus.Loading,
 		},
 		constructorState: {

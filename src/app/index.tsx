@@ -13,8 +13,20 @@ import { HomePage } from '@pages/home';
 import { ERoutes } from '../types/routes';
 import { OnlyAuth, OnlyUnAuth } from '@components/protected-route';
 import { ProfileOders } from '@pages/profile-orders';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { ingredientsThunk } from '../thunks';
+import { getUserThunk } from '../thunks/user/getUser';
 
 export const App = () => {
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		dispatch(ingredientsThunk());
+
+		dispatch(getUserThunk());
+	}, [dispatch]);
+
 	const location = useLocation();
 
 	const content = location.state?.backgroundLocation ? (

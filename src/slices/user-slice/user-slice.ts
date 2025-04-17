@@ -5,6 +5,7 @@ import {
 	loginUserThunk,
 	logoutUserThunk,
 } from '../../thunks/user';
+import { getUserThunk } from '../../thunks/user/getUser';
 
 const initialState: TUserState = {
 	user: null,
@@ -45,6 +46,17 @@ const userSlice = createSlice({
 				state.isAuthChecked = false;
 			})
 			.addCase(logoutUserThunk.fulfilled, (state) => {
+				state.user = null;
+				state.isAuthChecked = false;
+			})
+			.addCase(
+				getUserThunk.fulfilled,
+				(state, action: PayloadAction<TUserState>) => {
+					state.user = action.payload.user;
+					state.isAuthChecked = action.payload.isAuthChecked;
+				}
+			)
+			.addCase(getUserThunk.rejected, (state) => {
 				state.user = null;
 				state.isAuthChecked = false;
 			});

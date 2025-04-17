@@ -6,7 +6,7 @@ import { BurgerFixedItem } from './components/burger-fixed-item/burger-fixed-ite
 import { useCallback, useMemo } from 'react';
 import { OrderDetails } from './components/order-details';
 import { useSelector } from 'react-redux';
-import { selectConstructorBurger } from '../../selectors';
+import { selectConstructorBurger, selectUser } from '../../selectors';
 import { BurgerScrollItemEmpty } from './components/burger-scroll-item-empty';
 import { useDrop } from 'react-dnd';
 import { EDrugTypeIngredients } from '../../types/ingredients';
@@ -19,6 +19,7 @@ import {
 	setAllIngredient,
 	setIngredient,
 } from '../../slices';
+import { useNavigate } from 'react-router-dom';
 
 interface IBurgerConstructorProps {
 	onModalContent: (content: JSX.Element) => void;
@@ -28,6 +29,10 @@ export const BurgerConstructor: React.FC<IBurgerConstructorProps> = ({
 	onModalContent,
 }) => {
 	const { ingredients, bun } = useSelector(selectConstructorBurger);
+
+	const { user } = useSelector(selectUser);
+
+	const navigate = useNavigate();
 
 	const dispatch = useAppDispatch();
 
@@ -43,6 +48,10 @@ export const BurgerConstructor: React.FC<IBurgerConstructorProps> = ({
 	};
 
 	const handleClickButton = useCallback(async () => {
+		if (!user) {
+			navigate('/login');
+		}
+
 		const prepareIngredients = ingredients.map((item) => item.privateId);
 
 		await dispatch(
@@ -52,7 +61,7 @@ export const BurgerConstructor: React.FC<IBurgerConstructorProps> = ({
 		);
 
 		onModalContent(<OrderDetails />);
-	}, [bun.privateId, dispatch, ingredients, onModalContent]);
+	}, [bun.privateId, dispatch, ingredients, navigate, onModalContent, user]);
 
 	const moveCard = useCallback(
 		(dragIndex: number, hoverIndex: number) => {
@@ -84,7 +93,7 @@ export const BurgerConstructor: React.FC<IBurgerConstructorProps> = ({
 					isLocked={true}
 					price={bun.price}
 					thumbnail={bun.image}
-					text={bun.title}
+					text={bun.title + ' (верх)'}
 				/>
 				<div ref={dropRef} className={style.dynamicElements}>
 					{ingredients.length > 0 &&
@@ -104,7 +113,7 @@ export const BurgerConstructor: React.FC<IBurgerConstructorProps> = ({
 					isLocked={true}
 					price={bun.price}
 					thumbnail={bun.image}
-					text={bun.title}
+					text={bun.title + ' (низ)'}
 				/>
 			</div>
 			<div className={clsx(style.buttonContainer, 'pb-10 pr-5')}>

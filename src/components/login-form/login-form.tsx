@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 import { clsx } from 'clsx';
 import { Link } from 'react-router-dom';
 import { ERoutes } from '../../types/routes';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { useToggleState } from '../../hooks/useToggle';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { loginUserThunk } from '../../thunks/user';
@@ -29,12 +29,15 @@ export const LoginForm: React.FC = () => {
 		setPassword(e.currentTarget.value);
 	};
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (
+		e: SyntheticEvent<HTMLFormElement, SubmitEvent>
+	) => {
+		e.preventDefault();
 		await dispatch(loginUserThunk({ email, password }));
 	};
 
 	return (
-		<div className={styles.container}>
+		<form onSubmit={handleSubmit} className={styles.container}>
 			<p className='text text_type_main-medium'>Вход</p>
 			<Input
 				type='text'
@@ -51,11 +54,7 @@ export const LoginForm: React.FC = () => {
 				onChange={(e) => handlePasswordValue(e)}
 			/>
 			<div className={clsx(styles.btnContainer, 'mb-20')}>
-				<Button
-					onClick={handleSubmit}
-					htmlType='button'
-					type='primary'
-					size='medium'>
+				<Button htmlType='submit' type='primary' size='medium'>
 					Войти
 				</Button>
 			</div>
@@ -73,6 +72,6 @@ export const LoginForm: React.FC = () => {
 					</Link>
 				</div>
 			</div>
-		</div>
+		</form>
 	);
 };

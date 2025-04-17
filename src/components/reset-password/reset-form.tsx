@@ -5,7 +5,7 @@ import {
 import styles from './styles.module.scss';
 import { ERoutes } from '../../types/routes';
 import { clsx } from 'clsx';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useToggleState } from '../../hooks/useToggle';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
@@ -31,7 +31,10 @@ export const ResetForm: React.FC = () => {
 		setPin(e.currentTarget.value);
 	};
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (
+		e: SyntheticEvent<HTMLFormElement, SubmitEvent>
+	) => {
+		e.preventDefault();
 		const res = await dispatch(resetPasswordThunk({ password, token: pin }));
 		if (res.payload) {
 			localStorage.removeItem('afterForgotPage');
@@ -41,7 +44,7 @@ export const ResetForm: React.FC = () => {
 	};
 
 	return (
-		<div className={styles.container}>
+		<form onSubmit={handleSubmit} className={styles.container}>
 			<p className='text text_type_main-medium'>Восстановление пароля</p>
 			<Input
 				type={!isVisiblePassword ? 'password' : 'text'}
@@ -59,11 +62,7 @@ export const ResetForm: React.FC = () => {
 			/>
 
 			<div className={clsx(styles.btnContainer, 'mb-20')}>
-				<Button
-					onClick={handleSubmit}
-					htmlType='button'
-					type='primary'
-					size='medium'>
+				<Button htmlType='submit' type='primary' size='medium'>
 					Сохранить
 				</Button>
 			</div>
@@ -75,6 +74,6 @@ export const ResetForm: React.FC = () => {
 					</Link>
 				</div>
 			</div>
-		</div>
+		</form>
 	);
 };

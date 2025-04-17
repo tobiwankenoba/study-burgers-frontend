@@ -3,7 +3,7 @@ import {
 	Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './styles.module.scss';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { useToggleState } from '../../hooks/useToggle';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../selectors';
@@ -35,13 +35,16 @@ export const ProfileForm: React.FC = () => {
 		setPassword(e.currentTarget.value);
 	};
 
-	const handleSaveInfoUser = async () => {
+	const handleSaveInfoUser = async (
+		e: SyntheticEvent<HTMLFormElement, SubmitEvent>
+	) => {
+		e.preventDefault();
 		await dispatch(updateUserThunk({ email, password, name: login }));
 		toggleIsDisabled();
 	};
 
 	return (
-		<div className={styles.container}>
+		<form onSubmit={handleSaveInfoUser} className={styles.container}>
 			<Input
 				disabled={isDisabled}
 				icon={isDisabled ? 'EditIcon' : undefined}
@@ -70,15 +73,10 @@ export const ProfileForm: React.FC = () => {
 				onChange={(e) => handlePasswordValue(e)}
 			/>
 			{!isDisabled && (
-				<Button
-					onClick={handleSaveInfoUser}
-					htmlType='button'
-					type='primary'
-					size='medium'
-					width={200}>
+				<Button htmlType='submit' type='primary' size='medium' width={200}>
 					Сохранить
 				</Button>
 			)}
-		</div>
+		</form>
 	);
 };

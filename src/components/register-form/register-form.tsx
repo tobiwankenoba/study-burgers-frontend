@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 import { clsx } from 'clsx';
 import { Link } from 'react-router-dom';
 import { ERoutes } from '../../types/routes';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { useToggleState } from '../../hooks/useToggle';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { createUserThunk } from '../../thunks/user';
@@ -35,12 +35,15 @@ export const RegisterForm: React.FC = () => {
 		setPassword(e.currentTarget.value);
 	};
 
-	const handleClickBtn = async () => {
+	const handleClickBtn = async (
+		e: SyntheticEvent<HTMLFormElement, SubmitEvent>
+	) => {
+		e.preventDefault();
 		await dispatch(createUserThunk({ email, password, name: login }));
 	};
 
 	return (
-		<div className={styles.container}>
+		<form onSubmit={handleClickBtn} className={styles.container}>
 			<p className='text text_type_main-medium'>Регистрация</p>
 			<Input
 				type='text'
@@ -63,11 +66,7 @@ export const RegisterForm: React.FC = () => {
 				onChange={(e) => handlePasswordValue(e)}
 			/>
 			<div className={clsx(styles.btnContainer, 'mb-20')}>
-				<Button
-					htmlType='button'
-					type='primary'
-					onClick={handleClickBtn}
-					size='medium'>
+				<Button htmlType='submit' type='primary' size='medium'>
 					Зарегистрироваться
 				</Button>
 			</div>
@@ -79,6 +78,6 @@ export const RegisterForm: React.FC = () => {
 					</Link>
 				</div>
 			</div>
-		</div>
+		</form>
 	);
 };
