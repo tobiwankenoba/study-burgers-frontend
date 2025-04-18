@@ -1,40 +1,71 @@
-import { Content } from '@components/content';
-import style from './app.module.scss';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import style from './styles.module.scss';
 import { AppHeader } from '@components/app-header';
-import { createReduxStore } from '@utils/redux';
-import { TApplicationState } from '../types/redux';
-import { Provider } from 'react-redux';
-import { EIngridientStatus } from '../types/ingredients';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { EOrderStatus } from '../types/order';
+import { NotFound } from '@pages/not-found';
+import { IngredientPage } from '@pages/ingredient';
+import { LoginPage } from '@pages/login-page';
+import { RegisterPage } from '@pages/register-page';
+import { ForgotPassword } from '@pages/forgot-password';
+import { ResetPassword } from '@pages/reset-password';
+import { Profile } from '@pages/profile';
+import { ModalInfo } from '@components/modal-info';
+import { HomePage } from '@pages/home';
+import { ERoutes } from '../types/routes';
+import { OnlyAuth, OnlyUnAuth } from '@components/protected-route';
+import { ProfileOders } from '@pages/profile-orders';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { ingredientsThunk } from '../thunks';
+import { getUserThunk } from '../thunks/user/getUser';
 
 export const App = () => {
-	const preloadedState: TApplicationState = {
-		orderStatus: { status: EOrderStatus.Init },
-		ingridientsState: { ingridients: [], status: EIngridientStatus.Loading },
-		constructorState: {
-			bun: {
-				id: 0,
-				title: '',
-				price: 0,
-				image: '',
-				privateId: '',
-			},
-			ingridients: [],
-		},
-	};
+	const dispatch = useAppDispatch();
 
-	const store = createReduxStore(preloadedState, true);
+	useEffect(() => {
+		dispatch(ingredientsThunk());
+
+		dispatch(getUserThunk());
+	}, [dispatch]);
+
+	const location = useLocation();
+
+	const content = location.state?.backgroundLocation ? (
+		<Routes>
+			<Route
+				path={ERoutes.Ingredient}
+				element={<HomePage contentModal={<ModalInfo />} />}
+			/>
+		</Routes>
+	) : (
+		<Routes location={location.state?.backgroundLocation || location}>
+			<Route path={ERoutes.Ingredient} element={<IngredientPage />} />
+			<Route
+				path={ERoutes.Login}
+				element={<OnlyUnAuth component={<LoginPage />} />}
+			/>
+			<Route
+				path={ERoutes.Register}
+				element={<OnlyUnAuth component={<RegisterPage />} />}
+			/>
+			<Route path={ERoutes.ForgotPass} element={<ForgotPassword />} />
+			<Route path={ERoutes.ResetPass} element={<ResetPassword />} />
+			<Route path={ERoutes.Profile}>
+				<Route index element={<OnlyAuth component={<Profile />} />} />
+				<Route
+					path={ERoutes.ProfileOrders}
+					element={<OnlyAuth component={<ProfileOders />} />}
+				/>
+			</Route>
+
+			<Route index path={ERoutes.Main} element={<HomePage />} />
+			<Route path={ERoutes.NotFound} element={<NotFound />} />
+		</Routes>
+	);
 
 	return (
-		<Provider store={store}>
-			<DndProvider backend={HTML5Backend}>
-				<div className={style.container}>
-					<AppHeader />
-					<Content />
-				</div>
-			</DndProvider>
-		</Provider>
+		<div className={style.container}>
+			<AppHeader />
+			<div className={style.contentContainer}>{content}</div>
+		</div>
 	);
 };

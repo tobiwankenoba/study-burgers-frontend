@@ -13,10 +13,9 @@ export const fetchIngredients = async () => {
 			})
 			.then((res) => res);
 
-		console.log(response);
-
 		return prepareIngredients(response as TIngredientsResponse);
 	} catch (e) {
 		console.warn(e);
+		return [];
 	}
 };

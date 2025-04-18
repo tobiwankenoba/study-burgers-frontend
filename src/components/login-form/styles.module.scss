@@ -1,0 +1,16 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	max-width: 480px;
+	margin: 0 auto;
+	gap: 24px;
+	align-items: center;
+}
+
+.btnContainer {
+	max-width: 128px;
+}
+
+.links {
+	color: #8585ad;
+}

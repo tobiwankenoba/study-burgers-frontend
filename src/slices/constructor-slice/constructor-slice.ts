@@ -6,13 +6,13 @@ import {
 
 const initialState: TConstructorState = {
 	bun: {
-		id: 0,
+		id: 1,
 		title: '',
 		image: '',
-		price: 0,
+		price: 200,
 		privateId: '',
 	},
-	ingridients: [],
+	ingredients: [],
 };
 
 const constructorBurgerSlice = createSlice({
@@ -22,17 +22,17 @@ const constructorBurgerSlice = createSlice({
 		setBun: (state, action: PayloadAction<TConstructorIngredient>) => {
 			state.bun = action.payload;
 		},
-		setIngridient: (state, action: PayloadAction<TConstructorIngredient>) => {
-			state.ingridients = [...state.ingridients, action.payload];
+		setIngredient: (state, action: PayloadAction<TConstructorIngredient>) => {
+			state.ingredients = [...state.ingredients, action.payload];
 		},
-		setAllIngridient: (
+		setAllIngredient: (
 			state,
 			action: PayloadAction<TConstructorIngredient[]>
 		) => {
-			state.ingridients = action.payload;
+			state.ingredients = action.payload;
 		},
-		removeIngridient: (state, action: PayloadAction<number>) => {
-			state.ingridients = state.ingridients.filter(
+		removeIngredient: (state, action: PayloadAction<number>) => {
+			state.ingredients = state.ingredients.filter(
 				(item) => item.id !== action.payload
 			);
 		},
@@ -41,5 +41,5 @@ const constructorBurgerSlice = createSlice({
 
 export const {
 	reducer: constructorBurgerReducer,
-	actions: { setBun, setIngridient, removeIngridient, setAllIngridient },
+	actions: { setBun, setIngredient, removeIngredient, setAllIngredient },
 } = constructorBurgerSlice;

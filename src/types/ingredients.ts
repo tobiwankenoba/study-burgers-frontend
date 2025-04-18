@@ -18,15 +18,15 @@ export type TPreparedIngredients = {
 	items: TIngredient[];
 };
 
-export enum EIngridientStatus {
+export enum EIngredientStatus {
 	Loading = 'loading',
 	Success = 'success',
 	Failed = 'failed',
 }
 
-export type TIngridientsState = {
-	ingridients: TPreparedIngredients[];
-	status: EIngridientStatus;
+export type TIngredientsState = {
+	ingredients: TIngredient[];
+	status: EIngredientStatus;
 };
 
 export type TIngredientsResponse = {
@@ -51,9 +51,9 @@ export enum ETabs {
 	Ingredients = 'Начинки',
 }
 
-export enum EDrugTypeIngridients {
-	Ingridient = 'ingridient',
-	LocalIngridient = 'localIngridient',
+export enum EDrugTypeIngredients {
+	Ingredient = 'ingredient',
+	LocalIngredient = 'localIngredient',
 }
 
 export enum EDrugTypeBuns {

@@ -1,27 +1,9 @@
-import {
-	TIngredient,
-	TIngredientsResponse,
-	TPreparedIngredients,
-} from '../../types/ingredients';
+import { TIngredient, TIngredientsResponse } from '../../types/ingredients';
 
 export const prepareIngredients = (
 	response: TIngredientsResponse
-): TPreparedIngredients[] => {
-	const result = [
-		{
-			title: 'Булки',
-			items: [] as TIngredient[],
-		},
-		{
-			title: 'Соусы',
-			items: [] as TIngredient[],
-		},
-		{
-			title: 'Начинки',
-			items: [] as TIngredient[],
-		},
-	];
-	response.data.map(
+): TIngredient[] => {
+	return response.data.map(
 		({
 			_id,
 			name,
@@ -35,8 +17,8 @@ export const prepareIngredients = (
 			fat,
 			type,
 		}) => {
-			const formatedElement = {
-				id: Math.random(),
+			return {
+				id: getRandomInt(1, 100000),
 				privateId: _id,
 				type,
 				title: name,
@@ -49,22 +31,12 @@ export const prepareIngredients = (
 				fat,
 				proteins,
 			} as TIngredient;
-
-			switch (type) {
-				case 'bun':
-					result[0].items.push(formatedElement);
-					break;
-				case 'sauce':
-					result[1].items.push(formatedElement);
-					break;
-				case 'main':
-					result[2].items.push(formatedElement);
-					break;
-				default:
-					break;
-			}
 		}
 	);
-
-	return result;
 };
+
+function getRandomInt(min: number, max: number) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
