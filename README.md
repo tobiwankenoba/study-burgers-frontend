@@ -7,3 +7,5 @@
 `npm prepare` - установить husky
 
 `npm start` - запуск
+
+sprint-4/step-1 - проект изначально написан на typescript
