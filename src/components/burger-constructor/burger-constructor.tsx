@@ -54,9 +54,12 @@ export const BurgerConstructor: React.FC<IBurgerConstructorProps> = ({
 
 		const prepareIngredients = ingredients.map((item) => item.privateId);
 
+		const token = localStorage.getItem('accessToken') ?? '';
+
 		await dispatch(
 			createOrderThunk({
 				ingredients: [bun.privateId, ...prepareIngredients, bun.privateId],
+				token: token,
 			})
 		);
 

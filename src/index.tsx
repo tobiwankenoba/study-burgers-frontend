@@ -4,7 +4,7 @@ import { App } from './app';
 import './styles.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { TApplicationState } from './types/redux';
-import { EOrderStatus } from './types/order';
+import { EOrderStatus, WebsocketStatus } from './types/order';
 import { EIngredientStatus } from './types/ingredients';
 import { createReduxStore } from '@utils/redux';
 import { DndProvider } from 'react-dnd';
@@ -21,6 +21,16 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 		ingredientsState: {
 			ingredients: [],
 			status: EIngredientStatus.Loading,
+		},
+		orders: {
+			ordersInfo: { orders: [], success: false, total: 0, totalToday: 0 },
+			error: '',
+			status: WebsocketStatus.OFFLINE,
+		},
+		profileOrders: {
+			ordersInfo: { orders: [], success: false, total: 0, totalToday: 0 },
+			error: '',
+			status: WebsocketStatus.OFFLINE,
 		},
 		constructorState: {
 			bun: {
