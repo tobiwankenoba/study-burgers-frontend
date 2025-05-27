@@ -5,7 +5,7 @@ import { BurgerScrollItem } from './components/burger-scroll-item';
 import { BurgerFixedItem } from './components/burger-fixed-item/burger-fixed-item';
 import { useCallback, useMemo } from 'react';
 import { OrderDetails } from './components/order-details';
-import { useSelector } from 'react-redux';
+
 import { selectConstructorBurger, selectUser } from '../../selectors';
 import { BurgerScrollItemEmpty } from './components/burger-scroll-item-empty';
 import { useDrop } from 'react-dnd';
@@ -20,6 +20,7 @@ import {
 	setIngredient,
 } from '../../slices';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from '../../types/redux';
 
 interface IBurgerConstructorProps {
 	onModalContent: (content: JSX.Element) => void;

@@ -6,10 +6,11 @@ import {
 	EDrugTypeIngredients,
 	TIngredient,
 } from '../../../../types/ingredients';
-import { useSelector } from 'react-redux';
+
 import { selectConstructorBurger } from '../../../../selectors';
 import { useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from '../../../../types/redux';
 
 interface IIngredientProps {
 	image: string;

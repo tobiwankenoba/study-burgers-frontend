@@ -1,8 +1,9 @@
 import { clsx } from 'clsx';
 import style from './styles.module.scss';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
 import { selectIngredients } from '../../selectors';
+import { useSelector } from '../../types/redux';
 
 export const ModalInfo: React.FC = () => {
 	const { id } = useParams();

@@ -3,7 +3,7 @@ import { ProfileNav } from '@components/profile-nav';
 import { OrdersList } from '@components/orders-list';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useCallback, useEffect } from 'react';
-import { connect } from '../../actions/profileOrders';
+import { connect, disconnect } from '../../actions/profileOrders';
 import { useSelector } from '../../types/redux';
 import { selectProfileOrderInfo } from '../../selectors/select-profile-orders-info';
 import { useToggleState } from '../../hooks/useToggle';
@@ -31,6 +31,9 @@ export const ProfileOrders: React.FC<IProfileOrdersContentProps> = ({
 
 	useEffect(() => {
 		dispatch(connect('wss://norma.nomoreparties.space/orders'));
+		() => {
+			dispatch(disconnect());
+		};
 	}, [dispatch]);
 
 	const handleCloseModal = useCallback(() => {

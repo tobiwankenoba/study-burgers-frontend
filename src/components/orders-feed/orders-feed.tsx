@@ -1,7 +1,7 @@
 import { OrdersList } from '@components/orders-list';
 import styles from './styles.module.scss';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { connect } from '../../actions/orders';
+import { connect, disconnect } from '../../actions/orders';
 import { useCallback, useEffect, useMemo } from 'react';
 import { selectOrderInfo } from '../../selectors/select-orders-info';
 import { useSelector } from '../../types/redux';
@@ -40,6 +40,9 @@ export const OrdersFeed: React.FC<IOrdersFeedProps> = ({
 
 	useEffect(() => {
 		dispatch(connect('wss://norma.nomoreparties.space/orders/all'));
+		() => {
+			dispatch(disconnect());
+		};
 	}, [dispatch]);
 
 	const handleCloseModal = useCallback(() => {
