@@ -1,7 +1,8 @@
 import { clsx } from 'clsx';
 import style from './styles.module.scss';
-import { useSelector } from 'react-redux';
+
 import { selectOrderNumber } from '../../../../selectors';
+import { useSelector } from '../../../../types/redux';
 
 export const OrderDetails: React.FC = () => {
 	const orderNumber = useSelector(selectOrderNumber);

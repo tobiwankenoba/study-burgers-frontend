@@ -4,10 +4,10 @@ import { createOrder } from '@services/create-order';
 
 export const createOrderThunk = createAsyncThunk<
 	number,
-	{ ingredients: string[] },
+	{ ingredients: string[]; token?: string },
 	IThunkApi
->('order/create', async ({ ingredients }) => {
-	const response = await createOrder({ ingredients });
+>('order/create', async ({ ingredients, token }) => {
+	const response = await createOrder({ ingredients, token });
 
 	return response as number;
 });

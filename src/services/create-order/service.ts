@@ -3,16 +3,18 @@ import { TOrderResponse } from '../../types/order';
 
 type TCreateOrderParams = {
 	ingredients: string[];
+	token?: string;
 };
 
 export const createOrder = async (params: TCreateOrderParams) => {
 	try {
 		const response = await fetch(API_URl + 'orders', {
-			body: JSON.stringify(params),
+			body: JSON.stringify({ ingredients: params.ingredients }),
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
+				Authorization: params.token ?? '',
 			},
 		})
 			.then((res) => {

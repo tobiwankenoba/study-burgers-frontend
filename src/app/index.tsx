@@ -12,11 +12,14 @@ import { ModalInfo } from '@components/modal-info';
 import { HomePage } from '@pages/home';
 import { ERoutes } from '../types/routes';
 import { OnlyAuth, OnlyUnAuth } from '@components/protected-route';
-import { ProfileOders } from '@pages/profile-orders';
+import { ProfileOrders } from '@pages/profile-orders';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { ingredientsThunk } from '../thunks';
 import { getUserThunk } from '../thunks/user/getUser';
+import { Orders } from '@pages/orders';
+import { ModalOrder } from '@components/modal-order/modal-order';
+import { OrderPage } from '@pages/order-page/order-page';
 
 export const App = () => {
 	const dispatch = useAppDispatch();
@@ -35,10 +38,23 @@ export const App = () => {
 				path={ERoutes.Ingredient}
 				element={<HomePage contentModal={<ModalInfo />} />}
 			/>
+			<Route
+				path={ERoutes.Order}
+				element={<Orders contentModal={<ModalOrder />} />}
+			/>
+			<Route
+				path={ERoutes.ProfileOrder}
+				element={
+					<OnlyAuth
+						component={<ProfileOrders contentModal={<ModalOrder />} />}
+					/>
+				}
+			/>
 		</Routes>
 	) : (
 		<Routes location={location.state?.backgroundLocation || location}>
 			<Route path={ERoutes.Ingredient} element={<IngredientPage />} />
+			<Route path={ERoutes.Order} element={<OrderPage />} />
 			<Route
 				path={ERoutes.Login}
 				element={<OnlyUnAuth component={<LoginPage />} />}
@@ -49,11 +65,16 @@ export const App = () => {
 			/>
 			<Route path={ERoutes.ForgotPass} element={<ForgotPassword />} />
 			<Route path={ERoutes.ResetPass} element={<ResetPassword />} />
+			<Route path={ERoutes.Orders} element={<Orders />} />
 			<Route path={ERoutes.Profile}>
 				<Route index element={<OnlyAuth component={<Profile />} />} />
 				<Route
+					path={ERoutes.ProfileOrder}
+					element={<OnlyAuth component={<OrderPage />} />}
+				/>
+				<Route
 					path={ERoutes.ProfileOrders}
-					element={<OnlyAuth component={<ProfileOders />} />}
+					element={<OnlyAuth component={<ProfileOrders />} />}
 				/>
 			</Route>
 

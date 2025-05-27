@@ -5,11 +5,12 @@ import { useCallback, useRef, useState } from 'react';
 import { ETabs } from '../../types/ingredients';
 import { clsx } from 'clsx';
 import { ModalInfo } from '../modal-info';
-import { useSelector } from 'react-redux';
+
 import { selectIngredients } from '../../selectors';
 import { TABS } from '../../constants/tabs';
 import { computeBounding } from '@utils/computeBounding';
 import { formatIngredients } from '../../types/formatIngredients';
+import { useSelector } from '../../types/redux';
 
 interface IBurgerIngredientsProps {
 	onModalContent: (content: JSX.Element) => void;
