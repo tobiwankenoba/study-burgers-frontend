@@ -1,14 +1,11 @@
 import { clsx } from 'clsx';
 import style from './styles.module.scss';
-import { useLocation, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
 import { selectIngredients } from '../../selectors';
+import { useSelector } from '../../types/redux';
 
 export const ModalInfo: React.FC = () => {
-	const location = useLocation();
-
-	console.log(location);
-
 	const { id } = useParams();
 
 	const { ingredients } = useSelector(selectIngredients);

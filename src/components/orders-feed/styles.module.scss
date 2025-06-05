@@ -1,0 +1,54 @@
+.container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+
+	align-items: flex-start;
+}
+
+.info {
+	display: flex;
+	justify-content: space-between;
+	gap: 68px;
+}
+
+.ordersInfo {
+	flex: 0 0 580px;
+	display: flex;
+	flex-direction: column;
+	gap: 60px;
+}
+
+.ordersStatuses {
+	display: flex;
+	gap: 36px;
+}
+
+.orderStatus {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 272px;
+}
+
+.statusList {
+	height: 152px;
+	width: 272px;
+	// display: flex;
+	// flex-direction: column;
+	// align-items: flex-start;
+	display: grid;
+	align-items: flex-start;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(5, auto);
+	grid-auto-flow: column;
+	div {
+		width: max-content;
+	}
+}
+
+.ordersCount {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}

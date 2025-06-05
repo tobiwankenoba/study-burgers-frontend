@@ -5,10 +5,11 @@ import {
 import styles from './styles.module.scss';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { useToggleState } from '../../hooks/useToggle';
-import { useSelector } from 'react-redux';
+
 import { selectUser } from '../../selectors';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { updateUserThunk } from '../../thunks/user/updateUser';
+import { useSelector } from '../../types/redux';
 
 export const ProfileForm: React.FC = () => {
 	const { user } = useSelector(selectUser);

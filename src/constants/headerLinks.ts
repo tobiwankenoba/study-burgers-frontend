@@ -14,6 +14,6 @@ export const HEADER_LINKS = [
 		id: 2,
 		title: 'Лента заказов',
 		Icon: ListIcon,
-		url: '/order',
+		url: '/feed',
 	},
 ];
