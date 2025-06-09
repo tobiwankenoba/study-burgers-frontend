@@ -17,7 +17,9 @@ export const ModalInfo: React.FC = () => {
 	}
 
 	return (
-		<div className={clsx(style.container, 'p-10')}>
+		<div
+			className={clsx(style.container, 'p-10')}
+			data-testid='ingredientDetails'>
 			<div className='text text_type_main-large'>Детали ингредиента</div>
 			<div className={style.wrapper}>
 				<img

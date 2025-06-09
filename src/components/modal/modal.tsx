@@ -41,6 +41,7 @@ export const Modal: React.FC<IModalProps> = ({
 						<div
 							role='button'
 							tabIndex={0}
+							data-testid='modalClose'
 							className={style.close}
 							onClick={onClose}
 						/>

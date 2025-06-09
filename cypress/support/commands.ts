@@ -35,3 +35,22 @@
 //     }
 //   }
 // }
+
+import type {} from './cypress';
+
+Cypress.Commands.add('prepare', () => {
+	window.localStorage.setItem(
+		'refreshToken',
+		JSON.stringify('test-refreshToken')
+	);
+	window.localStorage.setItem(
+		'accessToken',
+		JSON.stringify('test-accessToken')
+	);
+	cy.intercept('GET', 'ingredients', { fixture: 'ingredients' }).as(
+		'getIngredients'
+	);
+	cy.intercept('GET', 'user', { fixture: 'user' }).as('getUser');
+	cy.intercept('POST', 'orders', { fixture: 'order' }).as('postOrder');
+	cy.visit('/');
+});
