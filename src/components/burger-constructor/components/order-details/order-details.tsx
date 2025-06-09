@@ -8,7 +8,9 @@ export const OrderDetails: React.FC = () => {
 	const orderNumber = useSelector(selectOrderNumber);
 
 	return (
-		<div className={clsx(style.container, 'p-10')}>
+		<div
+			className={clsx(style.container, 'p-10')}
+			data-testid='modalCreateOrder'>
 			<div className='text text_type_digits-large mb-8'>{orderNumber}</div>
 			<div className={style.wrapper}>
 				<div className={'text text_type_main-medium pb-10'}>

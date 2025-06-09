@@ -9,7 +9,7 @@ import {
 } from '../../actions/orders';
 import { TOrdersState, WebsocketStatus } from '../../types/order';
 
-const initialState: TOrdersState = {
+export const initialState: TOrdersState = {
 	status: WebsocketStatus.OFFLINE,
 	ordersInfo: { orders: [], success: false, total: 0, totalToday: 0 },
 	error: null,

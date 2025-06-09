@@ -50,6 +50,7 @@ export const Ingredient: React.FC<IIngredientProps> = ({
 
 	return (
 		<Link
+			data-testid='ingredientBurger'
 			to={`/ingredients/${privateId}`}
 			state={{ backgroundLocation: location }}
 			ref={dragRef}

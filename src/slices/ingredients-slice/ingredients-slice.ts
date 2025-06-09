@@ -6,7 +6,7 @@ import {
 } from '../../types/ingredients';
 import { ingredientsThunk } from '../../thunks';
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
 	ingredients: [],
 	status: EIngredientStatus.Loading,
 };

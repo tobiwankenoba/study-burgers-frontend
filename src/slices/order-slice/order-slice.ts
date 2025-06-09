@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { EOrderStatus, TOrderStatus } from '../../types/order';
 import { createOrderThunk } from '../../thunks';
 
-const initialState: TOrderStatus = {
+export const initialState: TOrderStatus = {
 	status: EOrderStatus.Init,
 };
 

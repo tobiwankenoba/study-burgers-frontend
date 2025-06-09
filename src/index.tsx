@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './app';
 import './styles.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { TApplicationState } from './types/redux';
 import { EOrderStatus, WebsocketStatus } from './types/order';
 import { EIngredientStatus } from './types/ingredients';
