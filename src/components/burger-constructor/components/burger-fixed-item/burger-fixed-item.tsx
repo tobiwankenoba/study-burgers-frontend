@@ -5,7 +5,7 @@ import { useDrop } from 'react-dnd';
 import { EDrugTypeBuns } from '../../../../types/ingredients';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { TConstructorIngredient } from '../../../../types/constructor';
-import { setBun } from '../../../../slices';
+import { setBun } from '../../../../slices/constructor-slice';
 
 interface IBurgerFixedItemProps {
 	type: 'top' | 'bottom' | undefined;
@@ -35,6 +35,7 @@ export const BurgerFixedItem: React.FC<IBurgerFixedItemProps> = ({
 		return (
 			<div ref={dropTarget} className={style.container}>
 				<div
+					data-testid='burgerContainer'
 					className={clsx(
 						style.empty,
 						type === 'top' ? style.top : style.bottom

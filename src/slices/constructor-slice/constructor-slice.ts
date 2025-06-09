@@ -4,7 +4,7 @@ import {
 	TConstructorState,
 } from '../../types/constructor';
 
-const initialState: TConstructorState = {
+export const initialState: TConstructorState = {
 	bun: {
 		id: 1,
 		title: '',

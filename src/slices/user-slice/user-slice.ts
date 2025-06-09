@@ -7,7 +7,7 @@ import {
 } from '../../thunks/user';
 import { getUserThunk } from '../../thunks/user/getUser';
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
 	user: null,
 	isAuthChecked: false,
 };

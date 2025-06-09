@@ -14,13 +14,14 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import update from 'immutability-helper';
 import { TConstructorIngredient } from '../../types/constructor';
 import { createOrderThunk } from '../../thunks';
+
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from '../../types/redux';
 import {
 	removeIngredient,
 	setAllIngredient,
 	setIngredient,
-} from '../../slices';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from '../../types/redux';
+} from '../../slices/constructor-slice';
 
 interface IBurgerConstructorProps {
 	onModalContent: (content: JSX.Element) => void;
@@ -124,7 +125,7 @@ export const BurgerConstructor: React.FC<IBurgerConstructorProps> = ({
 				<div className={clsx(style.price, 'text text_type_main-medium')}>
 					{finalPrice}
 				</div>
-				<div className={style.btn}>
+				<div className={style.btn} data-testid='createOrderBtn'>
 					<Button
 						htmlType='button'
 						onClick={handleClickButton}

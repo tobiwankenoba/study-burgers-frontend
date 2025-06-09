@@ -1,13 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { IPreloadedState } from '../../types/redux';
-import {
-	constructorBurgerReducer,
-	ingredientsReducer,
-	orderReducer,
-	profileOrdersReducer,
-	userReducer,
-	ordersReducer,
-} from '../../slices';
 import { socketMiddleware } from './middleware';
 import {
 	connect,
@@ -27,6 +19,12 @@ import {
 	onMessage as profileOnMessage,
 	onOpen as profileOnOpen,
 } from '../../actions/profileOrders';
+import { ingredientsReducer } from '../../slices/ingredients-slice';
+import { userReducer } from '../../slices/user-slice';
+import { constructorBurgerReducer } from '../../slices/constructor-slice';
+import { orderReducer } from '../../slices/order-slice';
+import { ordersReducer } from '../../slices/orders-slice';
+import { profileOrdersReducer } from '../../slices/profile-orders-slice';
 
 export const rootReducer = combineReducers({
 	ingredientsState: ingredientsReducer,

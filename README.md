@@ -1,5 +1,7 @@
 # Учебный проект по бургерной
 
+Ссылка на задеплоеный проект - https://tobiwankenoba.github.io/study-burgers-frontend/
+
 ### Команды для первого запуска
 
 `npm install` - установить зависимости
